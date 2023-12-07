@@ -69,7 +69,7 @@
         <div class="col">
             <div class="nav nav-tabs justify-content-center border-secondary mb-4">
                 <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Mô Tả</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Bình Luận (0)</a>
+                <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Bình Luận ({{$commentCounts}})</a>
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab-pane-1">
@@ -79,26 +79,31 @@
                 <div class="tab-pane fade" id="tab-pane-3">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4 class="mb-4">1 bình luận cho "{{ $product->product_name }}"</h4>
+                            <h4 class="mb-4">{{$commentCounts}} bình luận cho "{{ $product->product_name }}"</h4>
+
+                            @foreach($comments as $comment)
                             <div class="media mb-4">
-                                <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                <img src="{{ asset('storage/images/avatar.png') }}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                 <div class="media-body">
-                                    <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                    <div class="text-primary mb-2">
+                                    <h6>{{ $comment->com_name }}<small> - <i>{{ $comment->updated_at }}</i></small></h6>
+                                    <!-- <div class="text-primary mb-2">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star-half-alt"></i>
                                         <i class="far fa-star"></i>
-                                    </div>
-                                    <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                    </div> -->
+                                    <p><?php echo $comment->com_content; ?></p>
                                 </div>
                             </div>
+                            @endforeach
+
                         </div>
+
                         <div class="col-md-6">
                             <h4 class="mb-4">Để Lại Bình Luận</h4>
                             <small>Địa chỉ email của bạn sẽ không được hiển thị. Các trường bắt buộc được đánh dấu *</small>
-                            <div class="d-flex my-3">
+                            <!-- <div class="d-flex my-3">
                                 <p class="mb-0 mr-2">Your Rating * :</p>
                                 <div class="text-primary">
                                     <i class="far fa-star"></i>
@@ -107,11 +112,11 @@
                                     <i class="far fa-star"></i>
                                     <i class="far fa-star"></i>
                                 </div>
-                            </div>
+                            </div> -->
                             <form method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="message">Bình Luận Của Bạn *</label>
-                                    <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea id="message" cols="30" rows="5" class="form-control" name="comment"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Tên *</label>
@@ -122,8 +127,9 @@
                                     <input type="email" class="form-control" id="email" name="email">
                                 </div>
                                 <div class="form-group mb-0">
-                                    <input type="submit" value="Bình Luận" class="btn btn-primary px-3" name="comment">
+                                    <input type="submit" value="Bình Luận" class="btn btn-primary px-3">
                                 </div>
+                                {{ csrf_field() }}
                             </form>
                         </div>
                     </div>
@@ -140,10 +146,10 @@
     <div class="text-center mb-4">
         <h2 class="section-title px-5"><span class="px-2">Bạn Có Thể Thích</span></h2>
     </div>
+
     <div class="row px-xl-5">
         <div class="col">
             <div class="owl-carousel related-carousel">
-
                 @foreach ($randomProducts as $randomProduct)
                 <div class="card product-item border-0">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">

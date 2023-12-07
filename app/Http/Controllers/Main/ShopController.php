@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
@@ -33,6 +34,11 @@ class ShopController extends Controller
     public function getProductInformation($product_slug){
         $data['product'] = Product::where('product_slug', $product_slug)->first();
         $data['randomProducts'] = Product::inRandomOrder()->take(5)->get();
+        // $data['randomProducts'] = Product::all();
+        $product = Product::where('product_slug', $product_slug)->take(1)->get();
+        $id = $product->get(0)->product_id;
+        $data['comments'] = Comment::where('com_product', $id)->get();
+        $data['commentCounts'] = Comment::where('com_product', $id)->count();
         return view('Main.shopdetail', $data);
     }
 
@@ -54,10 +60,15 @@ class ShopController extends Controller
     // Post
 
     public function postProductComment(Request $request, $product_slug){
+
         $comment = new Comment();
         $comment->com_name = $request->name;
         $comment->com_email = $request->email;
         $comment->com_content = $request->comment;
+        $product = Product::where('product_slug', $product_slug)->take(1)->get();
+        $comment->com_product = $product->get(0)->product_id; // Get First Item From Collection
+        $comment->save();
 
+        return redirect()->back()->with(['comment_success' => 'Bình Luận Thành Công!!!']);
     }
 }

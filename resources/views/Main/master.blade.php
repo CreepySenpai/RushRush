@@ -27,6 +27,7 @@
     <script src="{{ asset('pageassets/js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('pageassets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('pageassets/lib/easing/easing.min.js') }}"></script>
+
     <script src="{{ asset('pageassets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
     <script src="{{ asset('pageassets/mail/jqBootstrapValidation.min.js') }}"></script>

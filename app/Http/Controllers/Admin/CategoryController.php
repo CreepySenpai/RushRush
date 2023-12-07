@@ -35,8 +35,6 @@ class CategoryController extends Controller
 
         $category->save(); // save to database
         return redirect()->back()->with(['add_category_success' => 'Thêm Danh Mục Thành Công!!!']);
-
-        // dd($request->cate_name . " : " . $request->description);
     }
 
     public function postEditCategory(EditCategoryRequest $request, $id){
