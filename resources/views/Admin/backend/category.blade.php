@@ -54,10 +54,7 @@
                                     <tr>
                                         <th>Tên Danh Mục</th>
                                         <th>Mô Tả</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -70,10 +67,13 @@
                                             <td>
                                                 <?php echo str_replace('"', '', $category->cate_des); ?>
                                             </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <a href="{{ asset('admin/category/edit/' . $category->cate_id ) }}" style="color: white; background-color: #17a2b8 !important; border-color: #17a2b8;" class="btn btn-info"><i class="fas fa-pen-square"></i> Sửa</a>
+                                                    <a href="{{ asset('admin/category/delete/' . $category->cate_id ) }}" style="color: white;" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Xoá</a>
+                                                </div>
+                                            </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -81,10 +81,8 @@
                                     <tr>
                                         <th>Tên Danh Mục</th>
                                         <th>Mô Tả</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>&nbsp;</th>
+
                                     </tr>
                                 </tfoot>
                             </table>

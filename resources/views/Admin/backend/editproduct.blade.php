@@ -100,7 +100,7 @@
                         <textarea name="description" style="display: none;" id="hiddenAreaAddProduct"></textarea>
                         <div class="border-top">
                             <div class="card-body">
-                                <input type="submit" class="btn btn-primary" value="Tạo Ngay">
+                                <input type="submit" class="btn btn-primary" value="Thay Đổi">
                             </div>
                         </div>
                         {{ csrf_field() }}

@@ -194,6 +194,7 @@
 
     const buttons = document.querySelectorAll('button');
 
+
     for (var button of buttons) {
         if (button.hasAttribute('value')) {
             button.addEventListener('click', (event) => {
@@ -204,5 +205,6 @@
         }
 
     }
+
 </script>
 @stop

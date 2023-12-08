@@ -40,11 +40,11 @@ class CategoryController extends Controller
     public function postEditCategory(EditCategoryRequest $request, $id){
         $category = Category::find($id);
         $category->cate_name = $request->cate_name;
-        $category->cate_des = $request->cate_des;
+        $category->cate_des = $request->description;
         $category->cate_slug = Str::slug($request->cate_name);
         $category->save();
 
-        return redirect()->intended('admin/category')->with(['edit_category_success' => 'Thay Đổi Danh Mục Thành Công!!']); // return to category
+        return redirect('admin/category')->with(['edit_category_success' => 'Thay Đổi Danh Mục Thành Công!!']); // return to category
     }
 
     // Delete

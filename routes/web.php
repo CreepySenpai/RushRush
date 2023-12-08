@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Main\RegisterController;
 use App\Http\Controllers\Main\ShopController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 
@@ -93,12 +94,14 @@ Route::group(['namespace' => 'Admin'], function() {
 
             Route::get('/delete/{id}', [ProductController::class, 'getDeleteProduct']);
         });
+
+        Route::group(['prefix' => 'user'], function(){
+            Route::get('/', [UserController::class, 'getUser']);
+            Route::get('/edit/{user_id}', [UserController::class, 'getEditUser']);
+            Route::post('/edit/{user_id}', [UserController::class, 'postEditUser']);
+            Route::get('/delete/{user_id}', [UserController::class, 'getDeleteUser']);
+        });
     });
 
-
-});
-
-
-Route::get('/test/locale', function(){
 
 });
