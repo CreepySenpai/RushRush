@@ -191,13 +191,6 @@
 </script>
 
 <script>
-    // function checkButtonPress(){
-    //     const result = confirm("Bạn có chắc chắn muốn xóa sản phẩm này?");
-    //     if (result) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
 
     const buttons = document.querySelectorAll('button');
 

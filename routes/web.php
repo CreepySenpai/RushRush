@@ -97,3 +97,8 @@ Route::group(['namespace' => 'Admin'], function() {
 
 
 });
+
+
+Route::get('/test/locale', function(){
+
+});

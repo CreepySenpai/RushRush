@@ -34,7 +34,6 @@ class ShopController extends Controller
     public function getProductInformation($product_slug){
         $data['product'] = Product::where('product_slug', $product_slug)->first();
         $data['randomProducts'] = Product::inRandomOrder()->take(5)->get();
-        // $data['randomProducts'] = Product::all();
         $product = Product::where('product_slug', $product_slug)->take(1)->get();
         $id = $product->get(0)->product_id;
         $data['comments'] = Comment::where('com_product', $id)->get();

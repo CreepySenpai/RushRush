@@ -2,7 +2,6 @@
 @section('main_page')
 @section('title', 'Chi Tiết Sản Phẩm')
 
-
 <!-- Shop Detail Start -->
 <div class="container-fluid py-5">
     <div class="row px-xl-5">
@@ -20,7 +19,7 @@
         <script>
             toastr.success("{{session('comment_success')}}", 'Thành Công!!');
         </script>
-    @endif
+        @endif
 
         <div class="col-lg-7 pb-5">
             <h3 class="font-weight-semi-bold">{{ $product->product_name }}</h3>
@@ -32,20 +31,20 @@
                     <small class="fas fa-star-half-alt"></small>
                     <small class="far fa-star"></small>
                 </div>
-                <small class="pt-1">(50 Reviews)</small>
+                <small class="pt-1">({{$commentCounts}} Bình Luận)</small>
             </div>
             <h3 class="font-weight-semi-bold mb-4">{{ number_format($product->product_price, 0, '.', ',') }} VND</h3>
-            <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit clita ea. Sanc invidunt ipsum et, labore clita lorem magna lorem ut. Erat lorem duo dolor no sea nonumy. Accus labore stet, est lorem sit diam sea et justo, amet at lorem et eirmod ipsum diam et rebum kasd rebum.</p>
+            <p class="mb-4"> {{$product->product_count}} Sản Phẩm Có Sẵn</p>
             <div class="d-flex align-items-center mb-4 pt-2">
                 <div class="input-group quantity mr-3" style="width: 130px;">
                     <div class="input-group-btn">
-                        <button class="btn btn-primary btn-minus">
+                        <button onclick="decreaseTotal()" class="btn btn-primary btn-minus">
                             <i class="fa fa-minus"></i>
                         </button>
                     </div>
-                    <input type="text" class="form-control bg-secondary text-center" value="1">
+                    <input id="totalProduct" type="text" class="form-control bg-secondary text-center" value="1">
                     <div class="input-group-btn">
-                        <button class="btn btn-primary btn-plus">
+                        <button onclick="increaseTotal()" class="btn btn-primary btn-plus">
                             <i class="fa fa-plus"></i>
                         </button>
                     </div>
@@ -91,7 +90,7 @@
                             <div class="media mb-4">
                                 <img src="{{ asset('storage/images/avatar.png') }}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                 <div class="media-body">
-                                    <h6>{{ $comment->com_name }}<small> - <i>{{ $comment->updated_at }}</i></small></h6>
+                                    <h6>{{ $comment->com_name }}<small> - <i>{{ date_format($comment->updated_at, "Y-m-d H:i:s") }}</i></small></h6>
                                     <!-- <div class="text-primary mb-2">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
@@ -146,18 +145,18 @@
 </div>
 <!-- Shop Detail End -->
 
-
 <!-- Products Start -->
 <div class="container-fluid py-5">
     <div class="text-center mb-4">
-        <h2 class="section-title px-5"><span class="px-2">Bạn Có Thể Thích</span></h2>
+        <h2 class="section-title px-5"><span class="px-2">You May Also Like</span></h2>
     </div>
-
     <div class="row px-xl-5">
         <div class="col">
             <div class="owl-carousel related-carousel">
-                @foreach ($randomProducts as $randomProduct)
-                <div class="card product-item border-0">
+
+                @foreach($randomProducts as $randomProduct)
+
+                <div class="card product-item border-0 slide">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                         <img class="img-fluid w-100" src="{{ asset('storage'. $randomProduct->product_image) }}" alt="">
                     </div>
@@ -174,10 +173,51 @@
                 </div>
                 @endforeach
 
+
+
             </div>
         </div>
     </div>
 </div>
 <!-- Products End -->
+
+
+<script>
+    var totalProduct = parseInt('{{ $product->product_count }}');
+    var buyProduct = 1;
+
+    $('document').ready(function() {
+        $('#totalProduct').val(buyProduct);
+    })
+
+    function increaseTotal() {
+        if (buyProduct >= totalProduct) {
+            toastr.warning("Số Lượng Sản Phẩm Không Được > " + totalProduct);
+
+            return;
+        }
+        $('#totalProduct').val(++buyProduct);
+    }
+
+    function decreaseTotal() {
+        if (buyProduct <= 1) {
+            toastr.warning("Số Lượng Sản Phẩm Không Được <= 0");
+            return;
+        }
+        $('#totalProduct').val(--buyProduct);
+    }
+</script>
+
+<script>
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+        items:4,
+        loop:true,
+        margin:10,
+        autoplay:true,
+        autoplayTimeout:1000,
+        autoplayHoverPause:true
+    });
+</script>
 
 @stop

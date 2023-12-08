@@ -27,17 +27,20 @@
     <link href="{{ asset('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
 
     <script src="{{ asset('pageassets/js/jquery-3.4.1.min.js') }}"></script>
+
     <script src="{{ asset('pageassets/js/bootstrap.bundle.min.js') }}"></script>
+
     <script src="{{ asset('pageassets/lib/easing/easing.min.js') }}"></script>
 
     <script src="{{ asset('pageassets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
-    <script src="{{ asset('pageassets/mail/jqBootstrapValidation.min.js') }}"></script>
-    <script src="{{ asset('pageassets/mail/contact.js') }}"></script>
+    <!-- <script src="{{ asset('pageassets/mail/jqBootstrapValidation.min.js') }}"></script>
+    <script src="{{ asset('pageassets/mail/contact.js') }}"></script> -->
 
-    <script src="{{ asset('pageassets/js/main.js') }}"></script>
+
 
     <script src="{{ asset('assets/libs/toastr/build/toastr.min.js') }}"></script>
+    <script src="{{ asset('pageassets/js/main.js') }}"></script>
 </head>
 
 <body>
