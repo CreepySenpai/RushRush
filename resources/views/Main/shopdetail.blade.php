@@ -16,6 +16,12 @@
             </div>
         </div>
 
+        @if(session()->has('comment_success'))
+        <script>
+            toastr.success("{{session('comment_success')}}", 'Thành Công!!');
+        </script>
+    @endif
+
         <div class="col-lg-7 pb-5">
             <h3 class="font-weight-semi-bold">{{ $product->product_name }}</h3>
             <div class="d-flex mb-3">
