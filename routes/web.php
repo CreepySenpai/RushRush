@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Main\RegisterController;
 use App\Http\Controllers\Main\ShopController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Main\CartController;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,17 @@ Route::get('/logout', [HomeController::class, 'getLogout']);
 
 Route::get('/', [ShopController::class, 'getMainPage']);
 
+Route::group(['prefix' => 'cart'], function(){
+    Route::get('/add/{product_id}', [CartController::class, 'getAddToCart']);
 
+    Route::get('/show', [CartController::class, 'getShowCart']);
+
+    Route::get('/remove/{cart_id}', [CartController::class, 'getRemoveCart']);
+
+    Route::get('/destroy', [CartController::class, 'getDestroyCart']);
+
+    Route::get('/checkout', [CartController::class, 'getCheckout']);
+});
 
 Route::group(['prefix' => 'shop'], function(){
     Route::get('/', [ShopController::class, 'getShopProduct']);
@@ -56,9 +67,7 @@ Route::group(['prefix' => 'shop'], function(){
     Route::get('/detail/{product_slug}', [ShopController::class, 'getProductInformation']);
     Route::post('/detail/{product_slug}', [ShopController::class, 'postProductComment']);
 
-    Route::get('/cart/', [ShopController::class, 'getShopCart']);
-
-    Route::get('/checkout/', [ShopController::class, 'getCheckout']);
+    // Route::get('/checkout/', [ShopController::class, 'getCheckout']);
 
     Route::get('category/{category_id}/{category_slug}', [ShopController::class, 'getProductByCategory']);
 });

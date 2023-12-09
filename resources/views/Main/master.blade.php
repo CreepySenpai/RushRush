@@ -99,7 +99,7 @@
             <div class="col-lg-3 col-6 text-right">
                 <a href="" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
+                    <span class="badge">{{ Cart::count() }}</span>
                 </a>
             </div>
         </div>
@@ -128,7 +128,7 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="{{ asset('/shop/cart') }}" class="dropdown-item">Giỏ Hàng</a>
+                                    <a href="{{ asset('/cart/show') }}" class="dropdown-item">Giỏ Hàng</a>
                                     <a href="{{ asset('/shop/checkout') }}" class="dropdown-item">Thanh Toán</a>
                                 </div>
                             </div>

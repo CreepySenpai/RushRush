@@ -23,14 +23,6 @@ class ShopController extends Controller
         return view('Main.shop', $data);
     }
 
-    public function getShopCart(){
-        return view('Main.cart');
-    }
-
-    public function getCheckout(){
-        return view('Main.checkout');
-    }
-
     public function getProductInformation($product_slug){
         $data['product'] = Product::where('product_slug', $product_slug)->first();
         $data['randomProducts'] = Product::inRandomOrder()->take(5)->get();
@@ -55,6 +47,8 @@ class ShopController extends Controller
 
         return view('Main.shopbysearch', $data);
     }
+
+
 
     // Post
 

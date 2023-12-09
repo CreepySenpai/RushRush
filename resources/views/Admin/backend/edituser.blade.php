@@ -5,7 +5,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/jquery-minicolors/jquery.minicolors.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/quill/dist/quill.snow.css') }}">
-<!-- <link rel="stylesheet" href="{{ asset('assets/libs/custom/custom.css'); }}"> -->
 
 
 
@@ -75,8 +74,6 @@
                                     </select>
                                 </div>
                             </div>
-
-
                         </div>
 
 
