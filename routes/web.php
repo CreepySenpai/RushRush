@@ -51,13 +51,19 @@ Route::get('/', [ShopController::class, 'getMainPage']);
 Route::group(['prefix' => 'cart'], function(){
     Route::get('/add/{product_id}', [CartController::class, 'getAddToCart']);
 
+    Route::post('/adds', [CartController::class, 'getAddMultiToCart']);
+
     Route::get('/show', [CartController::class, 'getShowCart']);
 
     Route::get('/remove/{cart_id}', [CartController::class, 'getRemoveCart']);
 
     Route::get('/destroy', [CartController::class, 'getDestroyCart']);
 
+    Route::get('/update', [CartController::class, 'getUpdateCart']);
+
     Route::get('/checkout', [CartController::class, 'getCheckout']);
+
+    Route::post('/checkout', [CartController::class, 'postCheckout']);
 });
 
 Route::group(['prefix' => 'shop'], function(){
@@ -66,8 +72,6 @@ Route::group(['prefix' => 'shop'], function(){
 
     Route::get('/detail/{product_slug}', [ShopController::class, 'getProductInformation']);
     Route::post('/detail/{product_slug}', [ShopController::class, 'postProductComment']);
-
-    // Route::get('/checkout/', [ShopController::class, 'getCheckout']);
 
     Route::get('category/{category_id}/{category_slug}', [ShopController::class, 'getProductByCategory']);
 });

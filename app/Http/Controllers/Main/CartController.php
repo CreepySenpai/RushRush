@@ -16,6 +16,13 @@ class CartController extends Controller
         return redirect('/cart/show')->with(['add_cart_success' => 'Sản Phẩm Đã Được Thêm Vào Giỏ Hàng!!!']);
     }
 
+    public function getAddMultiToCart(Request $request){
+        $product = Product::find($request->productId);
+        Cart::add(['id' => $request->productId, 'name' => $product->product_name, 'qty' => $request->productCartCount, 'price' => $product->product_price,
+        'options' => ['img' => $product->product_image]]);
+        return redirect('/cart/show')->with(['add_cart_success' => 'Sản Phẩm Đã Được Thêm Vào Giỏ Hàng!!!']);
+    }
+
     public function getShowCart(){
         $data['productInCart'] = Cart::content();
         $data['totalMoney'] = Cart::total();
@@ -33,7 +40,18 @@ class CartController extends Controller
     }
 
     public function getCheckout(){
+        $data['productInCart'] = Cart::content();
+        $data['totalMoney'] = Cart::total();
+        return view('Main.checkout', $data);
+    }
 
-        return view('Main.checkout');
+    public function getUpdateCart(Request $request){
+        Cart::update($request->rowId, $request->productCount);
+    }
+
+    //Post
+
+    public function postCheckout(Request $request){
+        dd($request->userName . " : " . $request->userEmail . " : " . $request->userPhoneNumber . " : " . $request->userAddress . " : " . $request->userTotalPay);
     }
 }

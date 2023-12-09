@@ -1,4 +1,4 @@
-@extends('Admin.backend.master')
+@extends('Admin.master')
 @section('title', 'Thêm Sản Phẩm')
 @section('main')
 

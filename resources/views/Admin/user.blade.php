@@ -1,9 +1,27 @@
-@extends('Admin.backend.master')
+@extends('Admin.master')
 @section('title', 'Danh Mục Người Dùng')
 @section('main')
 
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/extra-libs/multicheck/multicheck.css') }}">
 <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
+
+@if(session()->has('edit_user_success'))
+<script>
+    toastr.success("{{ session('edit_user_success') }}", 'Thành Công!!');
+</script>
+@endif
+
+@if(session()->has('delete_user_success'))
+<script>
+    toastr.success("{{ session('delete_user_success') }}", 'Thành Công!!');
+</script>
+@endif
+
+@if(session()->has('delete_user_error'))
+<script>
+    toastr.error("{{ session('delete_user_error') }}", 'Thất Bại!!');
+</script>
+@endif
 
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
@@ -27,23 +45,7 @@
         </div>
     </div>
 
-    @if(session()->has('edit_user_success'))
-    <script>
-        toastr.success("{{ session('edit_user_success') }}", 'Thành Công!!');
-    </script>
-    @endif
 
-    @if(session()->has('delete_user_success'))
-    <script>
-        toastr.success("{{ session('delete_user_success') }}", 'Thành Công!!');
-    </script>
-    @endif
-
-    @if(session()->has('delete_user_error'))
-    <script>
-        toastr.error("{{ session('delete_user_error') }}", 'Thất Bại!!');
-    </script>
-    @endif
 
     <div class="container-fluid">
         <!-- ============================================================== -->
@@ -81,15 +83,11 @@
                                             @endif
                                             @endforeach
                                         </td>
-                                        <td></td>
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <a href="{{ asset('admin/user/edit/' . $user->user_id ) }}" style="color: white; background-color: #17a2b8 !important; border-color: #17a2b8;" class="btn btn-info"><i class="fas fa-pen-square"></i> Sửa</a>
                                                 <a href="{{ asset('admin/user/delete/' . $user->user_id ) }}" style="color: white;" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Xoá</a>
                                             </div>
-                                        </td>
-                                        <td>
-
                                         </td>
                                     </tr>
                                     @endforeach

@@ -35,22 +35,26 @@
             </div>
             <h3 class="font-weight-semi-bold mb-4">{{ number_format($product->product_price, 0, '.', ',') }} VND</h3>
             <p class="mb-4"> {{$product->product_count}} Sản Phẩm Có Sẵn</p>
+            <form action="{{ asset('cart/adds') }}" method="post">
             <div class="d-flex align-items-center mb-4 pt-2">
                 <div class="input-group quantity mr-3" style="width: 130px;">
                     <div class="input-group-btn">
-                        <button onclick="decreaseTotal()" class="btn btn-primary btn-minus">
+                        <div onclick="decreaseTotal()" class="btn btn-primary btn-minus">
                             <i class="fa fa-minus"></i>
-                        </button>
+                        </div>
                     </div>
-                    <input id="totalProduct" type="text" class="form-control bg-secondary text-center" value="1">
+                    <input type="hidden" name="productId" value="{{ $product->product_id }}">
+                    <input name="productCartCount" id="totalProduct" type="text" class="form-control bg-secondary text-center" value="1">
                     <div class="input-group-btn">
-                        <button onclick="increaseTotal()" class="btn btn-primary btn-plus">
+                        <div onclick="increaseTotal()" class="btn btn-primary btn-plus">
                             <i class="fa fa-plus"></i>
-                        </button>
+                        </div>
                     </div>
                 </div>
-                <a href="{{ asset('/cart/add/'. $product->product_id) }}" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm Vào Giỏ Hàng</a>
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm Vào Giỏ Hàng</button>
             </div>
+            </form>
             <div class="d-flex pt-2">
                 <p class="text-dark font-weight-medium mb-0 mr-2">Chia Sẻ Trên :</p>
                 <div class="d-inline-flex">

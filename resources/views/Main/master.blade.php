@@ -125,14 +125,8 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{{ asset('/') }}" class="nav-item nav-link">Trang Chủ</a>
                             <a href="{{ asset('/shop/') }}" class="nav-item nav-link">Sản Phẩm</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="{{ asset('/cart/show') }}" class="dropdown-item">Giỏ Hàng</a>
-                                    <a href="{{ asset('/shop/checkout') }}" class="dropdown-item">Thanh Toán</a>
-                                </div>
-                            </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="{{ asset('/cart/show') }}" class="dropdown-item">Giỏ Hàng</a>
+                            <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                             <a href="{{ asset('/login') }}" class="nav-item nav-link">Đăng Nhập</a>

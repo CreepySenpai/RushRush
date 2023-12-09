@@ -1,4 +1,4 @@
-@extends('Admin.backend.master')
+@extends('Admin.master')
 @section('title', 'Chỉnh Sửa Danh Mục')
 @section('main')
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/select2/dist/css/select2.min.css') }}">

@@ -45,17 +45,17 @@ $shippingFee = 20000;
 
                                 <!-- <input readonly type="text" class="form-control form-control-sm bg-secondary text-center" value="{{ $product->qty }}"> -->
 
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
+                                <!-- <div class="input-group-btn">
+                                    <button onclick="decreaseTotal()" class="btn btn-sm btn-primary btn-minus">
                                         <i class="fa fa-minus"></i>
                                     </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary text-center" value="{{ $product->qty }}">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
+                                </div> -->
+                                <input onchange="updateCart(this.value, '{{ $product->rowId }}')" type="text" class="form-control form-control-sm bg-secondary text-center" value="{{ $product->qty }}">
+                                <!-- <div class="input-group-btn">
+                                    <button onclick="increaseTotal()" class="btn btn-sm btn-primary btn-plus">
                                         <i class="fa fa-plus"></i>
                                     </button>
-                                </div>
+                                </div> -->
                             </div>
                         </td>
                         <td class="align-middle">{{ number_format($product->price * $product->qty, 0, ',', '.') }} VND</td>
@@ -100,5 +100,21 @@ $shippingFee = 20000;
     </div>
 </div>
 <!-- Cart End -->
+
+<script>
+    function updateCart(productCount, rowId){
+        $.get(
+            "{{ asset('cart/update') }}",
+            {
+                productCount : productCount,
+                rowId : rowId
+            },
+            function(){
+                location.reload();
+                toastr.success("Cập Nhật Thành Công!!!", 'Thành Công!!');
+            }
+        );
+    }
+</script>
 
 @stop
