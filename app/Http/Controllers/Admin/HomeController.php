@@ -18,7 +18,7 @@ class HomeController extends Controller
         $data['productCount'] = Product::all()->count();
         $data['categoryCount'] = Category::all()->count();
         $data['commentCount'] = Comment::all()->count();
-        return view('Admin.backend.index', $data);
+        return view('Admin.index', $data);
     }
 
     public function getLogOut(){

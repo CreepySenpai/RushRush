@@ -19,18 +19,18 @@ class ProductController extends Controller
         $data['productList'] = Product::all();
         $data['cate'] = Category::all();
         $data['mode'] = 'table';
-        return view('Admin.backend.products', $data);
+        return view('Admin.products', $data);
     }
 
     public function getAddProduct(){
         $data['categoryList'] = Category::all();
-        return view('Admin.backend.addproduct', $data);
+        return view('Admin.addproduct', $data);
     }
 
     public function getEditProduct($id){
         $data['categoryList'] = Category::all();
         $data['product'] = Product::find($id);
-        return view('Admin.backend.editproduct', $data);
+        return view('Admin.editproduct', $data);
     }
 
     //Post

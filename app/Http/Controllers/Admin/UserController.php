@@ -12,13 +12,13 @@ class UserController extends Controller
     public function getUser(){
         $data['userList'] = User::all();
         $data['userRoleList'] = Role::all();
-        return view('Admin.backend.user', $data);
+        return view('Admin.user', $data);
     }
 
     public function getEditUser($user_id){
         $data['user'] = User::find($user_id);
         $data['roleList'] = Role::all();
-        return view('Admin.backend.edituser', $data);
+        return view('Admin.edituser', $data);
     }
 
     public function getDeleteUser($user_id){
