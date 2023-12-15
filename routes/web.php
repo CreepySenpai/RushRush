@@ -44,6 +44,8 @@ Route::group(['prefix' => 'register'], function() {
     Route::post('/', [RegisterController::class, 'postRegister']);
 });
 
+Route::post('/recover', [LoginController::class, 'postRecover']);
+
 Route::get('/logout', [HomeController::class, 'getLogout']);
 
 Route::get('/', [ShopController::class, 'getMainPage']);
@@ -113,6 +115,9 @@ Route::group(['namespace' => 'Admin'], function() {
             Route::get('/edit/{user_id}', [UserController::class, 'getEditUser']);
             Route::post('/edit/{user_id}', [UserController::class, 'postEditUser']);
             Route::get('/delete/{user_id}', [UserController::class, 'getDeleteUser']);
+
+            Route::get('/add', [UserController::class, 'getAddUser']);
+            Route::post('/add', [UserController::class, 'postAddUser']);
         });
     });
 

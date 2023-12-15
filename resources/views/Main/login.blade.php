@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
-    <title>Login</title>
+    <title>Đăng Nhập</title>
     <!-- Custom CSS -->
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
@@ -111,19 +111,19 @@
                     </div>
                     <!-- Form -->
 
-                        @if(session()->has('error'))
-                            <script>
-                                toastr.error( "Tài Khoản Hoặc Mật Khẩu Không Chính Xác!!!", 'Lỗi!');
-                            </script>
-                        @endif
+                    @if(session()->has('recover_success'))
+                        <script>
+                            toastr.success("{{session('recover_success')}}", 'Thành Công!');
+                        </script>
+                    @endif
 
-                        <!-- @if(count($errors) > 0)
-                                @foreach($errors->all() as $er)
-                                    <script>
-                                        toastr.error({{ $er }}, 'Error!');
-                                    </script>
-                                @endforeach
-                        @endif -->
+                    @if(count($errors) > 0)
+                        @foreach($errors->all() as $er)
+                        <script>
+                            toastr.error('{{$er}}', 'Error!');
+                        </script>
+                        @endforeach
+                    @endif
 
                     <form class="form-horizontal m-t-20" id="loginform" method="post">
                         <div class="row p-b-30">
@@ -153,7 +153,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <div class="p-t-20">
-                                        <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button>
+                                        <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Quên Mật Khẩu?</button>
                                         <button class="btn btn-success float-right" type="submit">Đăng Nhập</button>
                                     </div>
                                 </div>
@@ -164,25 +164,32 @@
                 </div>
                 <div id="recoverform">
                     <div class="text-center">
-                        <span class="text-white">Enter your e-mail address below and we will send you instructions how to recover a password.</span>
+                        <span class="text-white">Hãy Nhập Email Và Mật Khẩu Mới Của Bạn.</span>
                     </div>
                     <div class="row m-t-20">
                         <!-- Form -->
-                        <form class="col-12" action="index.html">
+                        <form class="col-12" action="{{ asset('/recover') }}" method="post">
                             <!-- email -->
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text bg-danger text-white" id="basic-addon1"><i class="ti-email"></i></span>
                                 </div>
-                                <input type="text" class="form-control form-control-lg" placeholder="Email Address" aria-label="Username" aria-describedby="basic-addon1">
+                                <input name="email" type="email" class="form-control form-control-lg" placeholder="Email Address" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
+                                    </div>
+                                    <input name="newPassword" type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required>
                             </div>
                             <!-- pwd -->
                             <div class="row m-t-20 p-t-20 border-top border-secondary">
                                 <div class="col-12">
-                                    <a class="btn btn-success" href="#" id="to-login" name="action">Back To Login</a>
-                                    <button class="btn btn-info float-right" type="button" name="action">Recover</button>
+                                    <a class="btn btn-success" href="#" id="to-login" name="action">Trở Lại Đăng Nhập</a>
+                                    <button class="btn btn-info float-right" type="submit" name="action">Khôi Phục</button>
                                 </div>
                             </div>
+                            {{ csrf_field() }}
                         </form>
                     </div>
                 </div>
