@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CheckoutRequest;
+use App\Models\Invoice;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
@@ -56,6 +59,20 @@ class CartController extends Controller
     //Post
 
     public function postCheckout(CheckoutRequest $request){
-        dd($request->userName . " : " . $request->userEmail . " : " . $request->userPhoneNumber . " : " . $request->userAddress . " : " . $request->userTotalPay);
+        $productInCart = Cart::content();
+        $invoice = new Invoice();
+        $invoice->invoice_user_id = Auth::id();
+        $invoice->invoice_code = Str::random(12);
+        $invoice->invoice_user_phone = $request->userPhoneNumber;
+        $invoice->invoice_user_address = $request->userAddress;
+        $invoice->invoice_total_money = Cart::total();
+        $invoice->invoice_total_product = Cart::count();
+        foreach($productInCart as $product){
+            dd($product->id);
+
+
+        }
+
+        dd($invoice->invoice_user_id . " : " . $invoice->invoice_code . " : " . $invoice->invoice_user_phone . " : " . $invoice->invoice_user_address . " : " . $invoice->invoice_total_money . " : " . $invoice->invoice_total_product);
     }
 }

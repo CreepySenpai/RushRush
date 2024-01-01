@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('invoice_id');
             $table->integer('invoice_user_id')->unsigned();
             $table->string('invoice_code');
+            $table->string('invoice_user_phone');
             $table->string('invoice_user_address');
             $table->bigInteger('invoice_total_money')->unsigned();
             $table->bigInteger('invoice_total_product')->unsigned();
