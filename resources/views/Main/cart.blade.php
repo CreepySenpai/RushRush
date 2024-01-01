@@ -21,6 +21,11 @@ $shippingFee = 20000;
     toastr.success("{{session('destroy_cart_success')}}", 'Thành Công!!');
 </script>
 @endif
+@if(session()->has('cart_empty'))
+<script>
+    toastr.error("{{session('cart_empty')}}", 'Thất Bại!!');
+</script>
+@endif
 <!-- Cart Start -->
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">

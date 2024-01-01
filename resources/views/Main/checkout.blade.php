@@ -7,6 +7,15 @@
 $shippingFee = 20000;
 
 @endphp
+
+@if(count($errors) > 0)
+    @foreach($errors->all() as $er)
+    <script>
+        toastr.error('{{$er}}', 'Error!');
+    </script>
+    @endforeach
+@endif
+
 <!-- Checkout Start -->
 <div class="container-fluid pt-5">
     <form method="post">
@@ -60,15 +69,20 @@ $shippingFee = 20000;
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
                             <h5 class="font-weight-bold">Tổng Tiền</h5>
-                            <?php
-                                $totalMoney = $totalMoney + $shippingFee;
-                            ?>
-                            <h5 class="font-weight-bold">{{ number_format($totalMoney, 0, ',', '.') }} VND</h5>
+
+                            <h5 class="font-weight-bold">
+                                @if($totalMoney == 0)
+                                    0
+                                @else
+                                    <?php $totalMoney = $totalMoney + $shippingFee;?>
+                                    {{number_format($totalMoney, 0, ',', '.')}}
+                                @endif VND
+                            </h5>
                         </div>
                         <input type="hidden" name="userTotalPay" value="{{ $totalMoney }}">
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
-                        <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Thanh Toán</button>
+                        <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Thanh Toán</button>
                     </div>
                 </div>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CheckoutRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -40,6 +41,9 @@ class CartController extends Controller
     }
 
     public function getCheckout(){
+        if(Cart::count() == 0){
+            return redirect()->back()->with(['cart_empty' => "Không Có Sản Phẩm Nào Trong Giỏ Hàng!"]);
+        }
         $data['productInCart'] = Cart::content();
         $data['totalMoney'] = Cart::total();
         return view('Main.checkout', $data);
@@ -51,7 +55,7 @@ class CartController extends Controller
 
     //Post
 
-    public function postCheckout(Request $request){
+    public function postCheckout(CheckoutRequest $request){
         dd($request->userName . " : " . $request->userEmail . " : " . $request->userPhoneNumber . " : " . $request->userAddress . " : " . $request->userTotalPay);
     }
 }
