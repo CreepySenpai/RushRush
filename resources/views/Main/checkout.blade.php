@@ -2,12 +2,6 @@
 @section('main_page_title', 'Thanh Toán')
 @section('main_page')
 
-@php
-
-$shippingFee = 20000;
-
-@endphp
-
 @if(count($errors) > 0)
     @foreach($errors->all() as $er)
     <script>
@@ -59,12 +53,6 @@ $shippingFee = 20000;
                             <p> {{ number_format($product->price * $product->qty, 0, ',', '.') }} VND</p>
                         </div>
                         @endforeach
-
-                        <hr class="mt-0">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Phí Vận Chuyển</h6>
-                            <h6 class="font-weight-medium">{{ number_format($shippingFee, 0, ',', '.') }} VND</h6>
-                        </div>
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
@@ -74,7 +62,6 @@ $shippingFee = 20000;
                                 @if($totalMoney == 0)
                                     0
                                 @else
-                                    <?php $totalMoney = $totalMoney + $shippingFee;?>
                                     {{number_format($totalMoney, 0, ',', '.')}}
                                 @endif VND
                             </h5>

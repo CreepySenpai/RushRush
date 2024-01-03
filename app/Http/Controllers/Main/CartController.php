@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CheckoutRequest;
 use App\Models\Invoice;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -56,23 +57,39 @@ class CartController extends Controller
         Cart::update($request->rowId, $request->productCount);
     }
 
+    public function getOrder(){
+        $data['invoiceList'] = Invoice::where('invoice_user_id', Auth::id())->get();
+        return view('Main.order', $data);
+    }
+
     //Post
 
     public function postCheckout(CheckoutRequest $request){
         $productInCart = Cart::content();
+
         $invoice = new Invoice();
         $invoice->invoice_user_id = Auth::id();
         $invoice->invoice_code = Str::random(12);
         $invoice->invoice_user_phone = $request->userPhoneNumber;
         $invoice->invoice_user_address = $request->userAddress;
+        $invoice->invoice_user_email = $request->userEmail;
+        $invoice->invoice_status = "WAIT";
         $invoice->invoice_total_money = Cart::total();
         $invoice->invoice_total_product = Cart::count();
-        foreach($productInCart as $product){
-            dd($product->id);
 
+        foreach($productInCart as $product){
+            // dd($product->id . " : " . $product->name . " : " . $product->qty);
+
+            $order = new Order();
+            $order->order_code = $invoice->invoice_code;
+            $order->produce_id = $product->id;
+            $order->produce_name = $product->name;
+            $order->produce_qty = $product->qty;
 
         }
 
-        dd($invoice->invoice_user_id . " : " . $invoice->invoice_code . " : " . $invoice->invoice_user_phone . " : " . $invoice->invoice_user_address . " : " . $invoice->invoice_total_money . " : " . $invoice->invoice_total_product);
+        //Cart::destroy();
+        // dd($invoice->invoice_user_id . " : " . $invoice->invoice_code . " : " . $invoice->invoice_user_phone . " : " . $invoice->invoice_user_address . " : " . $invoice->invoice_total_money . " : " . $invoice->invoice_total_product);
+        // return redirect('/order')->with(['order_success' => 'Đơn Hàng Đã Được Đặt Thành Công!!!']);
     }
 }

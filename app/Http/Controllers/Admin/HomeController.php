@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ class HomeController extends Controller
 {
     public function getHome(){
         $data['commentList'] = Comment::orderBy('updated_at', 'desc')->get();
+        $data['invoiceList'] = Invoice::orderBy('updated_at', 'desc')->get();
         $data['userCount'] = User::all()->count();
         $data['productCount'] = Product::all()->count();
         $data['categoryCount'] = Category::all()->count();

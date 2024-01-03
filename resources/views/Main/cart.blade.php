@@ -2,10 +2,6 @@
 @section('main_page_title', 'Giỏ Hàng')
 @section('main_page')
 
-@php
-$shippingFee = 20000;
-@endphp
-
 @if(session()->has('add_cart_success'))
 <script>
     toastr.success("{{session('add_cart_success')}}", 'Thành Công!!');
@@ -80,10 +76,6 @@ $shippingFee = 20000;
                         <h6 class="font-weight-medium">Tổng Tiền Sản Phẩm</h6>
                         <h6 class="font-weight-medium">{{ number_format($totalMoney, 0, ',', '.') }} VND</h6>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <h6 class="font-weight-medium">Phí Vận Chuyển</h6>
-                        <h6 class="font-weight-medium">{{ number_format($shippingFee, 0, ',', '.') }} VND</h6>
-                    </div>
                 </div>
                 <div class="card-footer border-secondary bg-transparent">
                     <div class="d-flex justify-content-between mt-2">
@@ -92,7 +84,6 @@ $shippingFee = 20000;
                         @if($totalMoney == 0)
                             0
                         @else
-                            <?php $totalMoney = $totalMoney + $shippingFee;?>
                             {{number_format($totalMoney, 0, ',', '.')}}
                         @endif
                         VND</h5>

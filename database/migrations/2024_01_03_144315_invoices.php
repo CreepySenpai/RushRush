@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Invoices', function (Blueprint $table) {
-            $table->increments('invoice_id');
+            $table->string('invoice_id', 30)->primary();
             $table->integer('invoice_user_id')->unsigned();
             $table->string('invoice_code');
             $table->string('invoice_user_phone');
             $table->string('invoice_user_address');
+            $table->string('invoice_user_email');
+            $table->string('invoice_status');
             $table->bigInteger('invoice_total_money')->unsigned();
             $table->bigInteger('invoice_total_product')->unsigned();
             $table->foreign('invoice_user_id')->references('user_id')->on('Users')->onDelete('cascade');

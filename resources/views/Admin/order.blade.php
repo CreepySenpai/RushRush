@@ -1,5 +1,5 @@
 @extends('Admin.master')
-@section('title', 'Danh Mục Sản Phẩm')
+@section('title', 'Danh Sách Đơn Hàng')
 @section('main')
 
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/extra-libs/multicheck/multicheck.css') }}">
@@ -14,12 +14,12 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Danh Mục</h4>
+                <h4 class="page-title">Đơn Hàng</h4>
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ asset('admin/home') }}">Trang Chủ</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Danh Mục</li>
+                            <li class="breadcrumb-item active" aria-current="page">Đơn Hàng</li>
                         </ol>
                     </nav>
                 </div>
@@ -33,7 +33,7 @@
         </script>
     @endif
 
-    @if(session()->has('delete_category_success'))
+    @if(session()->has('delete_order_success'))
         <script>
             toastr.success("{{ session('delete_category_success') }}", 'Thành Công!!');
         </script>
@@ -47,30 +47,42 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Danh Sách Danh Mục</h5>
+                        <h5 class="card-title">Danh Sách Đơn Hàng</h5>
                         <div class="table-responsive">
                             <table id="zero_config" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Tên Danh Mục</th>
-                                        <th>Mô Tả</th>
+                                        <th>Mã Đơn Hàng</th>
+                                        <th>Thông Tin Liên Hệ</th>
+                                        <th>Sản Phẩm</th>
+                                        <th>Tình Trạng</th>
+                                        <th>Tổng Tiền</th>
                                         <th>&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach($categoryList as $category)
+                                    @foreach($invoiceList as $invoice)
                                         <tr>
                                             <td>
-                                                {{ $category->cate_name }}
+                                                {{ $invoice->invoice_code }}
                                             </td>
                                             <td>
-                                                <?php echo str_replace('"', '', $category->cate_des); ?>
+                                                {{ $invoice->invoice_user_address }}
+                                            </td>
+                                            <td>
+                                                Sản Phẩm
+                                            </td>
+                                            <td>
+                                                {{ $invoice->invoice_status }}
+                                            </td>
+                                            <td>
+                                                {{ $invoice->invoice_total_money }}
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="{{ asset('admin/category/edit/' . $category->cate_id ) }}" style="color: white; background-color: #17a2b8 !important; border-color: #17a2b8;" class="btn btn-info"><i class="fas fa-pen-square"></i> Sửa</a>
-                                                    <a href="{{ asset('admin/category/delete/' . $category->cate_id ) }}" style="color: white;" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Xoá</a>
+                                                    <a href="{{ asset('admin/invoice/done/' . $invoice->invoice_id ) }}" style="color: white; background-color: #17a2b8 !important; border-color: #17a2b8;" class="btn btn-info"><i class="fas fa-pen-square"></i> Giao Hàng</a>
+                                                    <a href="{{ asset('admin/invoice/delete/' . $invoice->invoice_id ) }}" style="color: white;" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Xoá</a>
                                                 </div>
                                             </td>
 
@@ -79,10 +91,12 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Tên Danh Mục</th>
-                                        <th>Mô Tả</th>
+                                        <th>Mã Đơn Hàng</th>
+                                        <th>Thông Tin Liên Hệ</th>
+                                        <th>Sản Phẩm</th>
+                                        <th>Tình Trạng</th>
+                                        <th>Tổng Tiền</th>
                                         <th>&nbsp;</th>
-
                                     </tr>
                                 </tfoot>
                             </table>

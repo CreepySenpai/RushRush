@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Main\LoginController;
 use App\Http\Controllers\Customer\SignInUp;
 use App\Http\Controllers\Customer\ProductDetailsController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Main\ShopController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Main\CartController;
 use App\Http\Requests\LoginRequest;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 /*
@@ -66,6 +68,8 @@ Route::group(['prefix' => 'cart'], function(){
     Route::get('/checkout', [CartController::class, 'getCheckout']);
 
     Route::post('/checkout', [CartController::class, 'postCheckout']);
+
+    Route::get('/order', [CartController::class, 'getOrder']);
 });
 
 Route::group(['prefix' => 'shop'], function(){
@@ -118,6 +122,10 @@ Route::group(['namespace' => 'Admin'], function() {
 
             Route::get('/add', [UserController::class, 'getAddUser']);
             Route::post('/add', [UserController::class, 'postAddUser']);
+        });
+
+        Route::group(['prefix' => 'invoice'], function(){
+            Route::get('/', [InvoiceController::class, 'getInvoice']);
         });
     });
 

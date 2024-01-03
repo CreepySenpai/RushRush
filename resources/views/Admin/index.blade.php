@@ -240,6 +240,33 @@
             </div>
             <!-- column -->
 
+            <div class="col-lg-12">
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Đơn Hàng Gần Đây</h4>
+                        <div class="todo-widget scrollable" style="height:450px;">
+                            <ul class="list-task todo-list list-group m-b-0" data-role="tasklist">
+                                @foreach($invoiceList as $invoice)
+                                <li class="list-group-item todo-item" data-role="task">
+                                    <div class="custom-control custom-checkbox">
+                                        <img src="{{ asset('storage/images/avatar.png') }}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                        <span class="todo-desc">{{ $invoice->invoice_user_email }}</span> <span class="badge badge-pill badge-danger float-right">{{ $invoice->updated_at }}</span>
+                                    </div>
+                                    <div class="ml-5"> <b>Nội Dung: </b>
+                                        {{ $invoice->invoice_user_address }}
+                                    </div>
+                                </li>
+                                @endforeach
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
 
         </div>
         <!-- ============================================================== -->
@@ -253,7 +280,7 @@
     <!-- footer -->
     <!-- ============================================================== -->
     <footer class="footer text-center">
-        All Rights Reserved by Matrix-admin. Designed and Developed by <a href="">WrapPixel</a>.
+        All Rights Reserved by Matrix-admin. Designed and Developed by <a href="">OniChan</a>.
     </footer>
     <!-- ============================================================== -->
     <!-- End footer -->

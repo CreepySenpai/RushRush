@@ -114,7 +114,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-            Designed and Developed by <a href="">OniChan</a>.
+                All Rights Reserved by Matrix-admin. Designed and Developed by <a href="">OniChan</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

@@ -126,6 +126,7 @@
                                 <a href="{{ asset('/cart/show') }}" class="nav-link dropdown-toggle" data-toggle="dropdown">Giỏ Hàng</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     <a href="{{ asset('/cart/show') }}" class="dropdown-item">Xem Giỏ Hàng</a>
+                                    <a href="{{ asset('/cart/order') }}" class="dropdown-item">Xem Đơn Hàng</a>
                                 </div>
                             </div>
                         </div>
