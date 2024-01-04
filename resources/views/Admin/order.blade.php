@@ -90,8 +90,12 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="{{ asset('admin/invoice/done/' . $invoice->invoice_id ) }}" style="color: white; background-color: #17a2b8 !important; border-color: #17a2b8;" class="btn btn-info"><i class="fas fa-pen-square"></i> Giao Hàng</a>
-                                                    <a href="{{ asset('admin/invoice/delete/' . $invoice->invoice_id ) }}" style="color: white;" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Xoá</a>
+                                                    @if($invoice->invoice_status == "WAIT")
+                                                        <a href="{{ asset('admin/invoice/done/' . $invoice->invoice_id ) }}" style="color: white; background-color: #17a2b8 !important; border-color: #17a2b8;" class="btn btn-info"><i class="fas fa-pen-square"></i> Giao Hàng</a>
+                                                        <a href="{{ asset('admin/invoice/delete/' . $invoice->invoice_id ) }}" style="color: white;" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Xoá</a>
+                                                    @else
+                                                        <a href="#" style="color: white; background-color: #17a2b8 !important; border-color: #17a2b8;" class="btn btn-info"><i class="fas fa-pen-square"></i> Đơn Hàng Đã Được Giao </a>
+                                                    @endif
                                                 </div>
                                             </td>
 

@@ -131,8 +131,13 @@
                             </div>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="{{ asset('/login') }}" class="nav-item nav-link">Đăng Nhập</a>
-                            <a href="{{ asset('/register') }}" class="nav-item nav-link">Đăng Ký</a>
+                            @if(Auth::check())
+                                <a href="{{ asset('/logout') }}" class="nav-item nav-link">Đăng Xuất</a>
+                            @else
+                                <a href="{{ asset('/login') }}" class="nav-item nav-link">Đăng Nhập</a>
+                                <a href="{{ asset('/register') }}" class="nav-item nav-link">Đăng Ký</a>
+                            @endif
+
                         </div>
                     </div>
                 </nav>

@@ -177,22 +177,22 @@
                                     <div class="col-6 m-t-15">
                                         <div class="bg-dark p-10 text-white text-center">
                                             <i class="fa fa-tag m-b-5 font-16"></i>
-                                            <h5 class="m-b-0 m-t-5">9540</h5>
+                                            <h5 class="m-b-0 m-t-5">{{ $invoiceCount }}</h5>
                                             <small class="font-light">Total Orders</small>
                                         </div>
                                     </div>
                                     <div class="col-6 m-t-15">
                                         <div class="bg-dark p-10 text-white text-center">
                                             <i class="fa fa-table m-b-5 font-16"></i>
-                                            <h5 class="m-b-0 m-t-5">100</h5>
+                                            <h5 class="m-b-0 m-t-5">{{ $pendingInvoiceCount }}</h5>
                                             <small class="font-light">Pending Orders</small>
                                         </div>
                                     </div>
                                     <div class="col-6 m-t-15">
                                         <div class="bg-dark p-10 text-white text-center">
                                             <i class="fa fa-globe m-b-5 font-16"></i>
-                                            <h5 class="m-b-0 m-t-5">8540</h5>
-                                            <small class="font-light">Online Orders</small>
+                                            <h5 class="m-b-0 m-t-5">{{ number_format($revenue, 0, ',', '.') }} VND</h5>
+                                            <small class="font-light">Revenue</small>
                                         </div>
                                     </div>
                                 </div>
@@ -251,12 +251,38 @@
                                 <li class="list-group-item todo-item" data-role="task">
                                     <div class="custom-control custom-checkbox">
                                         <img src="{{ asset('storage/images/avatar.png') }}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                        <span class="todo-desc">{{ $invoice->invoice_user_email }}</span> <span class="badge badge-pill badge-danger float-right">{{ $invoice->updated_at }}</span>
+                                        <span class="todo-desc">Khách Hàng: {{ $invoice->invoice_user_email }}</span> <span class="badge badge-pill badge-danger float-right">{{ $invoice->updated_at }}</span>
                                     </div>
-                                    <div class="ml-5"> <b>Nội Dung: </b>
-                                        {{ $invoice->invoice_user_address }}
+                                    <div class="ml-5"> <b>Tình Trạng: </b>
+                                        {{ $invoice->invoice_status }}
+                                    </div>
+                                    <div class="ml-5"> <b>Thông Tin Thanh Toán: </b>
+                                        <br>
+                                        <div style="padding-left: 3%;">
+                                            SĐT:  {{ $invoice->invoice_user_phone }}
+                                            <br>
+                                            Địa Chỉ: {{ $invoice->invoice_user_address }}
+                                        </div>
+                                    </div>
+
+                                    <div class="ml-5"> <b>Sản Phẩm: </b>
+                                        <br>
+                                        <div style="padding-left: 3%;">
+                                            @foreach($orderList as $order)
+                                                @if($order->order_code == $invoice->invoice_id)
+                                                    {{ $order->produce_qty }}x {{ $order->produce_name }}
+                                                    <br>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    <div class="ml-5"> <b>Tổng Tiền: </b>
+                                        {{ number_format($invoice->invoice_total_money, 0, ',', '.') }} VND
                                     </div>
                                 </li>
+
+
                                 @endforeach
 
                             </ul>

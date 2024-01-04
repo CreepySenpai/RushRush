@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -24,6 +25,16 @@ class InvoiceController extends Controller
         $invoice = Invoice::find($invoice_id);
         $invoice->invoice_status = "DONE";
         $invoice->save();
+
+        $doneOrderList = Order::where('order_code', $invoice_id)->get();
+
+        foreach($doneOrderList as $order){
+            $productID = $order->getAttribute('produce_id');
+            $orderQty = $order->getAttribute('produce_qty');
+            $product = Product::find($productID);
+            $product->product_count = $product->product_count - $orderQty;
+            $product->save();
+        }
 
         return redirect()->back()->with(['done_invoice_success' => 'Đơn Hàng Đang Được Vận Chuyển!!!']);
     }

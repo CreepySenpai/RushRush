@@ -131,6 +131,5 @@ Route::group(['namespace' => 'Admin'], function() {
             Route::get('/done/{invoice_id}', [InvoiceController::class, 'getDoneInvoice']);
         });
     });
-
-
 });
+
