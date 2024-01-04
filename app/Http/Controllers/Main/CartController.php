@@ -53,8 +53,30 @@ class CartController extends Controller
         return view('Main.checkout', $data);
     }
 
-    public function getUpdateCart(Request $request){
+    public function getUpdateCart(Request $request)
+    {
+        $product = Product::find($request->id)->first();
+        $remainProduct = $product->getAttribute('product_count');
+        if ($request->productCount > $remainProduct) {
+            $message = "Số lượng không được vượt quá " . $remainProduct . " !!!";
+            return response()->json([
+                'status' => 'fail',
+                'message' => $message,
+            ]);
+        }
+        elseif($request->productCount <= 0) {
+            $message = "Số lượng không được nhỏ hơn 0 !!!";
+            return response()->json([
+                'status' => 'fail',
+                'message' => $message,
+            ]);
+        }
+
         Cart::update($request->rowId, $request->productCount);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Cập Nhật Thành Công!!!',
+        ]);
     }
 
     public function getOrder(){

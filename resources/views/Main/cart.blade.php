@@ -22,6 +22,7 @@
     toastr.error("{{session('cart_empty')}}", 'Thất Bại!!');
 </script>
 @endif
+
 <!-- Cart Start -->
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
@@ -51,7 +52,7 @@
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div> -->
-                                <input onchange="updateCart(this.value, '{{ $product->rowId }}')" type="text" class="form-control form-control-sm bg-secondary text-center" value="{{ $product->qty }}">
+                                <input onchange="updateCart(this.value, '{{ $product->rowId }}', '{{ $product->id }}')" type="text" class="form-control form-control-sm bg-secondary text-center" value="{{ $product->qty }}">
                                 <!-- <div class="input-group-btn">
                                     <button onclick="increaseTotal()" class="btn btn-sm btn-primary btn-plus">
                                         <i class="fa fa-plus"></i>
@@ -98,16 +99,21 @@
 <!-- Cart End -->
 
 <script>
-    function updateCart(productCount, rowId){
+    function updateCart(productCount, rowId, id){
         $.get(
             "{{ asset('cart/update') }}",
             {
                 productCount : productCount,
-                rowId : rowId
+                rowId : rowId,
+                id : id
             },
-            function(){
+            function(response){
                 location.reload();
-                toastr.success("Cập Nhật Thành Công!!!", 'Thành Công!!');
+                if (response.status === "success") {
+                    toastr.success(response.message, 'Thành Công!!', { timeOut: 10000 });
+                } else {
+                    toastr.error(response.message, 'Thất Bại!!', { timeOut: 10000 });
+                }
             }
         );
     }
