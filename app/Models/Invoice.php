@@ -11,6 +11,8 @@ class Invoice extends Model
 
     protected $table = 'Invoices';
     protected $primaryKey = 'invoice_id';
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     // Can access all data
     protected $guarded = [];

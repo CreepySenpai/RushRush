@@ -70,6 +70,7 @@ Route::group(['prefix' => 'cart'], function(){
     Route::post('/checkout', [CartController::class, 'postCheckout']);
 
     Route::get('/order', [CartController::class, 'getOrder']);
+    Route::get('/order/delete/{invoice_id}', [CartController::class, 'getDeleteOrder']);
 });
 
 Route::group(['prefix' => 'shop'], function(){
@@ -126,6 +127,8 @@ Route::group(['namespace' => 'Admin'], function() {
 
         Route::group(['prefix' => 'invoice'], function(){
             Route::get('/', [InvoiceController::class, 'getInvoice']);
+            Route::get('/delete/{invoice_id}', [InvoiceController::class, 'getDeleteInvoice']);
+            Route::get('/done/{invoice_id}', [InvoiceController::class, 'getDoneInvoice']);
         });
     });
 

@@ -20,6 +20,10 @@ class RoleTableSeeder extends Seeder
             ],
             [
                 'role_name' => 'Customer',
+                'role_desc' => 'Không có quyền truy cập hệ thống'
+            ],
+            [
+                'role_name' => 'Staff',
                 'role_desc' => 'Có quyền sử dụng các chức năng cơ bản'
             ]
         ];

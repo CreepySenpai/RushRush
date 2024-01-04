@@ -65,19 +65,28 @@
                                     @foreach($invoiceList as $invoice)
                                         <tr>
                                             <td>
-                                                {{ $invoice->invoice_code }}
+                                                {{ $invoice->invoice_id }}
                                             </td>
                                             <td>
-                                                {{ $invoice->invoice_user_address }}
+                                                SĐT: {{ $invoice->invoice_user_phone }}
+                                                <br>
+                                                Email: {{ $invoice->invoice_user_email }}
+                                                <br>
+                                                Địa Chỉ: {{ $invoice->invoice_user_address }}
                                             </td>
                                             <td>
-                                                Sản Phẩm
+                                                @foreach($orderList as $order)
+                                                    @if($order->order_code == $invoice->invoice_id)
+                                                    {{ $order->produce_qty }}x   {{ $order->produce_name }}
+                                                    <br>
+                                                    @endif
+                                                @endforeach
                                             </td>
                                             <td>
                                                 {{ $invoice->invoice_status }}
                                             </td>
                                             <td>
-                                                {{ $invoice->invoice_total_money }}
+                                                {{ number_format($invoice->invoice_total_money, 0, ',', '.') }} VND
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
