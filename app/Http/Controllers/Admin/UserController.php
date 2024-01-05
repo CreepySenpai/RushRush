@@ -54,6 +54,11 @@ class UserController extends Controller
 
     public function postAddUser(AddUserRequest $request){
         $user = new User();
-
+        $user->user_name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role_type = $request->role;
+        $user->save();
+        return redirect()->back()->with(['add_user_success' => 'Thêm Người Dùng Thành Công!!!']);
     }
 }
