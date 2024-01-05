@@ -15,9 +15,10 @@ return new class extends Migration
             $table->increments('order_id');
             $table->string('order_code', 30);
             $table->string('produce_name');
-            $table->integer('produce_id');
+            $table->integer('produce_id')->unsigned();
             $table->integer('produce_qty');
             $table->foreign('order_code')->references('invoice_id')->on('Invoices')->onDelete('cascade');
+            $table->foreign('produce_id')->references('product_id')->on('Products')->onDelete('cascade');
             $table->timestamps();
         });
     }

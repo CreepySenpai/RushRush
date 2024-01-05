@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddUserRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -41,7 +43,11 @@ class UserController extends Controller
         $user = User::find($user_id);
         $user->user_name = $request->user_name;
         $user->email = $request->user_email;
-        $user->role_type = $request->user_role;
+
+        // only admin can change role
+        if(Auth::user()->role_type == UserType::ADMIN){
+            $user->role_type = $request->user_role;
+        }
         $user->save();
         return redirect('admin/user')->with(['edit_user_success' => 'Thay Đổi Thông Tin Người Dùng Thành Công!!!']);
     }
