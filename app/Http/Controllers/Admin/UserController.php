@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     public function getDeleteUser($user_id){
-        if($user_id == 1){
+        if($user_id == UserType::ADMIN){
             return redirect()->back()->with(['delete_user_error' => 'Không Thể Xoá Người Dùng Này!!!']);
         }
         else{

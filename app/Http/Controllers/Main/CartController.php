@@ -23,6 +23,13 @@ class CartController extends Controller
 
     public function getAddMultiToCart(Request $request){
         $product = Product::find($request->productId);
+        if($product->product_count < $request->productCartCount){
+            $mess = 'Số Lượng Sản Phẩm Không Được Lớn Hơn ' . $product->product_count . " !!!";
+            return redirect()->back()->with(['add_cart_fail' => $mess]);
+        }
+        elseif($request->productCartCount <= 0){
+            return redirect()->back()->with(['add_cart_fail' => "Số Lượng Sản Phẩm Không Được <= 0 !!!"]);
+        }
         Cart::add(['id' => $request->productId, 'name' => $product->product_name, 'qty' => $request->productCartCount, 'price' => $product->product_price,
         'options' => ['img' => $product->product_image]]);
         return redirect('/cart/show')->with(['add_cart_success' => 'Sản Phẩm Đã Được Thêm Vào Giỏ Hàng!!!']);

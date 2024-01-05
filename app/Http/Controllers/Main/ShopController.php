@@ -14,12 +14,17 @@ class ShopController extends Controller
     public function getMainPage(){
         $data['randomProducts'] = Product::inRandomOrder()->take(8)->get();
         $data['onghut'] = Product::where('product_type', 1)->count();
+        $data['tuivai'] = Product::where('product_type', 2)->count();
+        $data['hop'] = Product::where('product_type', 3)->count();
+        $data['xaphong'] = Product::where('product_type', 4)->count();
+        $data['vai'] = Product::where('product_type', 5)->count();
+        $data['ly'] = Product::where('product_type', 6)->count();
         $data['newProducts'] = Product::orderBy('product_id', 'desc')->take(8)->get();
         return view('Main.index', $data);
     }
 
     public function getShopProduct(){
-        $data['productList'] = Product::orderBy('product_id', 'desc')->paginate(1);
+        $data['productList'] = Product::orderBy('product_id', 'desc')->paginate(6);
         return view('Main.shop', $data);
     }
 
@@ -34,7 +39,7 @@ class ShopController extends Controller
     }
 
     public function getProductByCategory($category_id){
-        $data['productListByCategory'] = Product::where('product_type', $category_id)->orderBy('product_id', 'desc')->paginate(1);
+        $data['productListByCategory'] = Product::where('product_type', $category_id)->orderBy('product_id', 'desc')->paginate(3);
         $data['categoryName'] = Category::find($category_id);
         return view('Main.shopbycategory', $data);
     }
@@ -42,7 +47,7 @@ class ShopController extends Controller
     public function getSearchResult(Request $request){
         $result = str_replace(' ', '%', $request->result);
         $data['productName'] = $request->result;
-        $data['productFounds'] = Product::where('product_name', 'like', '%' . $result . '%')->paginate(1);
+        $data['productFounds'] = Product::where('product_name', 'like', '%' . $result . '%')->paginate(3);
         $data['productCount'] = Product::where('product_name', 'like', '%' . $result . '%')->count();
 
         return view('Main.shopbysearch', $data);

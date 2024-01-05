@@ -21,6 +21,12 @@
         </script>
         @endif
 
+        @if(session()->has('add_cart_fail'))
+        <script>
+            toastr.warning("{{session('add_cart_fail')}}", 'Thất Bại!!');
+        </script>
+        @endif
+
         <div class="col-lg-7 pb-5">
             <h3 class="font-weight-semi-bold">{{ $product->product_name }}</h3>
             <div class="d-flex mb-3">
