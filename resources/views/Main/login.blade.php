@@ -117,6 +117,18 @@
                         </script>
                     @endif
 
+                    @if(session()->has('not_loggin'))
+                        <script>
+                            toastr.error("{{session('not_loggin')}}", 'Thất Bại!');
+                        </script>
+                    @endif
+
+                    @if(session()->has('success_status'))
+                        <script>
+                            toastr.success("{{session('success_status')}}", 'Thành Công!');
+                        </script>
+                    @endif
+
                     @if(count($errors) > 0)
                         @foreach($errors->all() as $er)
                         <script>
@@ -148,6 +160,7 @@
                                 <span></span>
                                 Remember Me
                             </label>
+                            <a href="{{ asset('/register') }}" class=" float-right">Tạo Tài Khoản Mới</a>
                         </div>
                         <div class="row border-top border-secondary">
                             <div class="col-12">

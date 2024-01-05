@@ -37,12 +37,12 @@
         </script>
     @endif
 
-    <div class="border-top">
+    <!-- <div class="border-top">
         <div class="card-body">
             <h5 class="card-title">Thay Đổi Chế Độ Hiển Thị</h5>
             <button type="button" class="btn btn-primary btn-lg" onclick="changeMode()">Thay Đổi</button>
         </div>
-    </div>
+    </div> -->
 
     <div id="tableContent" class="container-fluid" style="display: block;">
         <div class="row">
@@ -102,7 +102,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -120,7 +120,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <div id="cardChange" class="container-fluid" style="display: none;">
@@ -156,55 +156,55 @@
 
 <script>
     // Default Init
-    var productTableMode = 'card';
-    var deleteProduct = 0;
+    // var productTableMode = 'card';
+    // var deleteProduct = 0;
 </script>
 
 <script>
-    function changeMode() {
-        if (productTableMode === 'card') {
-            productTableMode = 'table';
-            document.getElementById('tableContent').style.display = 'none';
-            document.getElementById('cardChange').style.display = 'block';
-        } else if (productTableMode == 'table') {
-            productTableMode = 'card';
-            document.getElementById('tableContent').style.display = 'block';
-            document.getElementById('cardChange').style.display = 'none';
-        }
+    // function changeMode() {
+    //     if (productTableMode === 'card') {
+    //         productTableMode = 'table';
+    //         document.getElementById('tableContent').style.display = 'none';
+    //         document.getElementById('cardChange').style.display = 'block';
+    //     } else if (productTableMode == 'table') {
+    //         productTableMode = 'card';
+    //         document.getElementById('tableContent').style.display = 'block';
+    //         document.getElementById('cardChange').style.display = 'none';
+    //     }
 
-    }
+    // }
 
-    document.getElementById('targetButton').addEventListener('click', (event) => {
-        window.location.href = 'http://127.0.0.1:8000/admin/home/' + deleteProduct;
-    });
+    // document.getElementById('targetButton').addEventListener('click', (event) => {
+    //     window.location.href = 'http://127.0.0.1:8000/admin/home/' + deleteProduct;
+    // });
 </script>
 
 
 <script>
-    function checkSure() {
-        const result = confirm("Bạn có chắc chắn muốn xóa không?");
-        if (result) {
-            return true;
-        }
-        return false;
-    }
+    // function checkSure() {
+    //     const result = confirm("Bạn có chắc chắn muốn xóa không?");
+    //     if (result) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 </script>
 
 <script>
 
-    const buttons = document.querySelectorAll('button');
+    // const buttons = document.querySelectorAll('button');
 
 
-    for (var button of buttons) {
-        if (button.hasAttribute('value')) {
-            button.addEventListener('click', (event) => {
-                var btValue = event.target.value;
-                deleteProduct = btValue;
-                alert("You Press: " + deleteProduct);
-            });
-        }
+    // for (var button of buttons) {
+    //     if (button.hasAttribute('value')) {
+    //         button.addEventListener('click', (event) => {
+    //             var btValue = event.target.value;
+    //             deleteProduct = btValue;
+    //             alert("You Press: " + deleteProduct);
+    //         });
+    //     }
 
-    }
+    // }
 
 </script>
 @stop

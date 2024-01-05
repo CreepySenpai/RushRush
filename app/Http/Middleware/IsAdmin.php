@@ -2,12 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserType;
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
-class CheckLogedOut
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,9 +17,10 @@ class CheckLogedOut
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Prevent Guest Try To Go Admin Page
-        if(Auth::guest()){
-            return redirect()->intended('login');
+        if(Auth::check()){
+            if(Auth::user()->role_type == UserType::CUSTOMER){
+                return redirect('/')->with(['permission_deny' => "Bạn Không Có Quyền Truy Cập Trang Này!!!"]);
+            }
         }
         return $next($request);
     }

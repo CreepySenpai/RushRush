@@ -7,6 +7,12 @@
 <link href="{{ asset('assets/libs/flot/css/float-chart.css') }}" rel="stylesheet">
 <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
 
+@if(session()->has('already_loggin'))
+<script>
+    toastr.error("{{session('already_loggin')}}", 'Thất Bại!!');
+</script>
+@endif
+
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
@@ -20,7 +26,7 @@
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active"><a href="#">Trang Chủ</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ asset('admin/home') }}">Trang Chủ</a></li>
                         </ol>
                     </nav>
                 </div>

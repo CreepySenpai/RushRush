@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserType;
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
-use Termwind\Components\Dd;
+use Symfony\Component\HttpFoundation\Response;
 
-class AdminLoggin
+class CanLogout
 {
     /**
      * Handle an incoming request.
@@ -17,11 +17,12 @@ class AdminLoggin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Prevent User Try To Go Admin Page
-        // Check If User Was Loggin and Role Id
         if(Auth::check()){
-            if(Auth::user()->role_type == 2){
-                return redirect('/shop/');
+            if(Auth::user()->role_type == UserType::CUSTOMER){
+                return redirect('/')->with(['already_loggin' => "Bạn đã đăng nhập rồi!!!"]);
+            }
+            else{
+                return redirect('/admin/home')->with(['already_loggin' => "Bạn đã đăng nhập rồi!!!"]);
             }
         }
         return $next($request);

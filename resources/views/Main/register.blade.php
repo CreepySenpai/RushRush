@@ -13,6 +13,7 @@
     <title>Matrix Template - The Ultimate Multipurpose admin template</title>
     <!-- Custom CSS -->
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/libs/toastr/build/toastr.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,6 +26,21 @@
             color: #fd592c;
         }
     </style>
+
+        <script script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="{{ asset('assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/extra-libs/sparkline/sparkline.js') }}"></script>
+        <!--Wave Effects -->
+        <script src="{{ asset('dist/js/waves.js') }}"></script>
+        <!--Menu sidebar -->
+        <script src="{{ asset('dist/js/sidebarmenu.js') }}"></script>
+        <!--Custom JavaScript -->
+        <script src="{{ asset('dist/js/custom.min.js') }}"></script>
+        <!--This page JavaScript -->
+        <script src="{{ asset('assets/libs/toastr/build/toastr.min.js') }}"></script>
 </head>
 
 <body>
@@ -51,26 +67,17 @@
                         <span class="db"><img src="{{ asset('assets/images/logo.png') }}" alt="logo" /></span>
                     </div>
                     <!-- Form -->
-                    @if(count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach($errors->all() as $er)
-                                    <li> {{$er}} </li>
-                                @endforeach
-                            </ul>
+
+                    @if(session()->has('error_status'))
+                        <div class="alert alert-success">
+                            {{session()->get('error_status')}}
                         </div>
                     @endif
 
-                    @if(session()->has('success_message'))
-                        <div class="alert alert-success">
-                            {{session()->get('success_message')}}
-                        </div>
-                    @endif
-
-                    @if(session()->has('error_message'))
-                        <div class="alert alert-success">
-                            {{session()->get('error_message')}}
-                        </div>
+                    @if(session()->has('error_status'))
+                        <script>
+                            toastr.error("{{session('error_status')}}", 'Thất Bại!');
+                        </script>
                     @endif
 
                     <form class="form-horizontal m-t-20" method="post" onsubmit="return checkPassword()">

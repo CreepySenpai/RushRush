@@ -2,6 +2,17 @@
 @section('main_page_title', 'Trang Chủ')
 @section('main_page')
 
+@if(session()->has('permission_deny'))
+<script>
+    toastr.error("{{session('permission_deny')}}", 'Thất Bại!!');
+</script>
+@endif
+
+@if(session()->has('already_loggin'))
+<script>
+    toastr.error("{{session('already_loggin')}}", 'Thất Bại!!');
+</script>
+@endif
 
 <!-- Featured Start -->
 <div class="container-fluid pt-5">

@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="dropdown ml-4">
+                        <!-- <div class="dropdown ml-4">
                             <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Sort by
                             </button>
@@ -32,7 +32,7 @@
                                 <a class="dropdown-item" href="#">Popularity</a>
                                 <a class="dropdown-item" href="#">Best Rating</a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 

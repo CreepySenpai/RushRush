@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
-class CheckLogedIn
+class IsLoggin
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,8 @@ class CheckLogedIn
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // If admin was loggin
-        if(Auth::check()){
-            return redirect()->intended('admin/home');
+        if(Auth::guest()){
+            return redirect('/login')->with(['not_loggin' => "Bạn Phải Đăng Nhập Để Thực Hiện Thao Tác Này!!!"]);
         }
         return $next($request);
     }

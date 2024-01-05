@@ -23,10 +23,10 @@ class RegisterController extends Controller
         $status = $newUser->save();
 
         if($status == true){
-            return redirect()->back()->with('success_status', 'Tạo Tài Khoản Thành Công!!!');
+            return redirect('/login')->with(['success_status' => 'Tạo Tài Khoản Thành Công!!!']);
         }
         else{
-            return redirect()->back()->with('error_status', 'Tạo Tài Khoản Thất Bại! Vui Lòng Sử Dụng Email Khác!!');
+            return redirect()->back()->with(['error_status' => 'Tạo Tài Khoản Thất Bại! Vui Lòng Sử Dụng Email Khác!!']);
         }
     }
 }

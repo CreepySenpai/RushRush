@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Main;
 
+use App\Enums\UserType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RecoverRequest;
@@ -23,6 +24,9 @@ class LoginController extends Controller
         $loginValue = ['email' => $request->email, 'password' => $request->password];
 
         if(Auth::attempt($loginValue, $remember)){
+            if(Auth::user()->role_type == UserType::CUSTOMER){
+                return redirect('/');
+            }
             return redirect('/admin/home');
         }
         else{

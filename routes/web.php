@@ -36,7 +36,7 @@ use Illuminate\Http\Request;
 
 // Main Route
 // If user press login we check if user was logged
-Route::group(['prefix' => 'login', 'middleware' => 'CheckLoggedIn'], function() {
+Route::group(['prefix' => 'login', 'middleware' => 'CanLogout'], function() {
     Route::get('/', [LoginController::class, 'getLogin']);
     Route::post('/', [LoginController::class, 'postLogin']);
 });
@@ -52,7 +52,7 @@ Route::get('/logout', [HomeController::class, 'getLogout']);
 
 Route::get('/', [ShopController::class, 'getMainPage']);
 
-Route::group(['prefix' => 'cart'], function(){
+Route::group(['prefix' => 'cart', 'middleware' => 'IsLoggin'], function(){
     Route::get('/add/{product_id}', [CartController::class, 'getAddToCart']);
 
     Route::post('/adds', [CartController::class, 'getAddMultiToCart']);
@@ -87,7 +87,7 @@ Route::group(['prefix' => 'shop'], function(){
 Route::group(['namespace' => 'Admin'], function() {
 
     // Check if guest try to go home page with out loggin
-    Route::group(['prefix' => 'admin', 'middleware' => ['CheckLoggedOut', 'AdminLoggin']], function(){
+    Route::group(['prefix' => 'admin', 'middleware' => ['IsLoggin', 'IsAdmin']], function(){
         Route::get('/home', [HomeController::class, 'getHome']);
 
         Route::group(['prefix' => 'category'], function(){
@@ -131,5 +131,7 @@ Route::group(['namespace' => 'Admin'], function() {
             Route::get('/done/{invoice_id}', [InvoiceController::class, 'getDoneInvoice']);
         });
     });
+
+
 });
 
